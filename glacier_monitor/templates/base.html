@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HimalayaWatch multi-hazard early-warning research prototype.">
+  <title>{% block title %}HimalayaWatch{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/leaflet.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('main.dashboard') }}">
+      <span aria-hidden="true">△</span> HimalayaWatch
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('imagery.imagery_page') }}">Glacier Imagery</a>
+      <a href="{{ url_for('main.alerts_page') }}">Alerts</a>
+      <a href="{{ url_for('main.about') }}">About &amp; Data</a>
+    </nav>
+  </header>
+  <div class="demo-banner" role="status">
+    RESEARCH PROTOTYPE — synthetic data unless explicitly labeled. Configured notifications
+    require validated evidence and explicit authorization; they are not official public warnings.
+  </div>
+  <main id="main-content">{% block content %}{% endblock %}</main>
+  <footer>
+    Evidence before alerts · uncertainty made visible · authorized humans decide
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}About & Data | HimalayaWatch{% endblock %}
+{% block content %}
+<section class="page-intro">
+  <p class="eyebrow">TRANSPARENCY FIRST</p>
+  <h1>Evidence-based, human-authorized warning research</h1>
+  <p>HimalayaWatch is an early-stage AI research prototype for multi-hazard early-warning decision support across Nepal, Tibet, India, and Pakistan. It explores how fragmented mountain and hydrometeorological evidence can become timely, traceable analysis—not automated public warnings.</p>
+</section>
+<div class="content-grid">
+  <article class="prose-card">
+    <p class="eyebrow">WHY THIS MATTERS</p>
+    <h2>Cascading hazards cross system boundaries</h2>
+    <p>An ice or rock collapse can dam or displace water. A glacial lake can release suddenly. Rainfall can mobilize landslides and debris. The resulting flood can damage the very sensors needed to understand it.</p>
+    <p>The challenge is not only data scarcity: evidence arrives from different systems, on different clocks, with different uncertainty. HimalayaWatch preserves both <strong>when something was observed</strong> and <strong>when it became available</strong>, so retrospective tests do not use future knowledge.</p>
+  </article>
+  <article class="prose-card">
+    <p class="eyebrow">SAFETY PRINCIPLES</p>
+    <h2>What the prototype will not claim</h2>
+    <ul>
+      <li>Movement alone is not evidence of impending collapse.</li>
+      <li>Missing or stale observations are not evidence of safety.</li>
+      <li>Catalog access is not validated satellite hazard detection.</li>
+      <li>Optical scenes can confuse cloud, shadow, and seasonal snow with surface change; quicklooks are not analysis-ready products.</li>
+      <li>Climate change affects background conditions, but attribution for one event requires investigation.</li>
+      <li>Scientists validate evidence; authorized officials decide whether to issue warnings.</li>
+    </ul>
+  </article>
+</div>
+<div class="content-grid">
+  <article class="prose-card">
+    <h2>Prototype capabilities</h2>
+    <ul>
+      <li>Interpretable river-level and threshold baselines with explicit withholding states.</li>
+      <li>Analysis of supplied movement measurements without equating motion to failure.</li>
+      <li>Observation-time, availability-time, freshness, provenance, and quality checks.</li>
+      <li>Interactive maps, trends, downstream corridors, and traceable results.</li>
+      <li>Bounded discovery checks against BIPAD records and the Sentinel catalog.</li>
+      <li>Normalized JSON source adapters and optional Azure Event Hubs ingestion.</li>
+      <li>Human-authorized parallel SMS, email, and webhook delivery with a durable, auditable outbox.</li>
+      <li>Historical-event and non-event evaluation path for false alarms and usable warning time.</li>
+    </ul>
+  </article>
+  <article class="prose-card">
+    <h2>Data provenance and status</h2>
+    <table>
+      <thead><tr><th>Source</th><th>Purpose</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://www.glims.org/glacierdata/">GLIMS</a> / <a href="https://nsidc.org/data/glims">NSIDC</a></td><td>Glacier inventory and outlines</td><td>Adapter placeholder</td></tr>
+        <tr><td><a href="https://its-live.jpl.nasa.gov/">NASA ITS_LIVE</a></td><td>Satellite-derived ice velocity</td><td>Adapter placeholder</td></tr>
+        <tr><td><a href="https://rds.icimod.org/">ICIMOD RDS</a></td><td>Regional cryosphere datasets</td><td>Adapter placeholder</td></tr>
+        <tr><td><a href="https://www.dhm.gov.np/">Nepal DHM</a></td><td>Hydrology and meteorology</td><td>Adapter placeholder</td></tr>
+        <tr><td><a href="https://www.ncpor.res.in/pages/view/115/426-himansh">India NCPOR HIMANSH</a> / <a href="https://vedas.sac.gov.in/en/Himalayan_Glacier_Inventory_Atlas.html">ISRO VEDAS</a></td><td>Glacier research and inventory context</td><td>Curated metadata</td></tr>
+        <tr><td><a href="https://www.pmd.gov.pk/Observatories/">Pakistan PMD</a></td><td>Mountain meteorological observatories</td><td>Curated metadata; no live feed</td></tr>
+        <tr><td><a href="https://bipadportal.gov.np/api/">Nepal BIPAD API</a></td><td>Disaster-record discovery</td><td>Bounded metadata check</td></tr>
+        <tr><td><a href="https://dataspace.copernicus.eu/">Copernicus Data Space / Sentinel</a></td><td>Earth observation imagery</td><td>Adapter placeholder</td></tr>
+        <tr><td><a href="https://gml.noaa.gov/ccgg/">NOAA GML</a> / <a href="https://ads.atmosphere.copernicus.eu/">CAMS</a></td><td>Atmospheric measurements and modeled products</td><td>Adapter placeholder</td></tr>
+        <tr><td>JSON file / HTTPS JSON</td><td>Normalized sensor-event ingestion</td><td>Implemented; upstream field mapping required</td></tr>
+        <tr><td>Azure Event Hubs</td><td>High-throughput event transport</td><td>Implemented; optional Azure configuration</td></tr>
+        <tr><td>Azure Communication Services</td><td>Authorized SMS and email delivery</td><td>Implemented; recipients, SMS sender, and linked email domain required</td></tr>
+      </tbody>
+    </table>
+  </article>
+</div>
+<article class="prose-card api-docs">
+  <p class="eyebrow">REFERENCE CASE</p>
+  <h2>26 August 2026 border flood</h2>
+  <p>The application includes a retrospective representation of the supplied preliminary ICIMOD assessment: a suspected high-altitude ice-rock avalanche followed by a destructive Bhote Koshi–Trishuli flood, with a reported rise of up to nine metres in 30 minutes. The trigger remains labeled preliminary, and the prototype does not make a climate-attribution claim.</p>
+  <p>This case is used to test evidence timing, sensor-loss behavior, cascading-hazard reasoning, downstream context, and warning-time evaluation. It is not presented as a live event feed.</p>
+</article>
+<article class="prose-card api-docs">
+  <h2>JSON API</h2>
+  <p>All responses use JSON. Write endpoints optionally require <code>X-API-Key</code> when <code>WRITE_API_KEY</code> is configured.</p>
+  <table>
+    <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>GET</td><td><code>/api/assets?country=India&amp;asset_type=lake&amp;risk_level=high</code></td><td>List and filter assets.</td></tr>
+      <tr><td>GET</td><td><code>/api/assets/&lt;slug&gt;</code></td><td>Asset details and reading history.</td></tr>
+      <tr><td>GET</td><td><code>/api/readings?asset=imja-tsho&amp;limit=100</code></td><td>Reading history.</td></tr>
+      <tr><td>POST</td><td><code>/api/readings</code></td><td>Post a validated reading and evaluate alerts.</td></tr>
+      <tr><td>POST</td><td><code>/api/source-events</code></td><td>Accept a normalized, idempotent sensor event.</td></tr>
+      <tr><td>GET</td><td><code>/api/source-events</code></td><td>Inspect ingestion status without exposing raw payloads.</td></tr>
+      <tr><td>GET</td><td><code>/api/alerts?acknowledged=false</code></td><td>List alerts.</td></tr>
+      <tr><td>GET</td><td><code>/api/cases</code></td><td>Retrospective cases and downstream locations.</td></tr>
+      <tr><td>GET</td><td><code>/api/discovery-status</code></td><td>Bounded source-discovery checks and limitations.</td></tr>
+      <tr><td>POST</td><td><code>/api/alerts/&lt;id&gt;/acknowledge</code></td><td>Acknowledge an alert.</td></tr>
+      <tr><td>POST</td><td><code>/api/alerts/&lt;id&gt;/authorize</code></td><td>Authorize validated, non-synthetic evidence and queue notifications.</td></tr>
+      <tr><td>GET/POST</td><td><code>/api/notification-subscriptions</code></td><td>List masked recipients or configure SMS/webhook recipients.</td></tr>
+      <tr><td>GET</td><td><code>/api/notification-deliveries</code></td><td>Inspect delivery attempts and outcomes.</td></tr>
+    </tbody>
+  </table>
+  <h3>Reading example</h3>
+  <pre><code>{
+  "asset": "imja-tsho",
+  "metric": "water_level_m",
+  "value": 4.63,
+  "observed_at": "2026-09-07T12:00:00+00:00",
+  "available_at": "2026-09-07T13:30:00+00:00",
+  "quality_status": "provisional",
+  "source_url": "https://example.org/traceable-record",
+  "is_synthetic": true,
+  "metadata": {"quality": "demo"}
+}</code></pre>
+  <h3>Normalized source event</h3>
+  <pre><code>{
+  "event_id": "dhm-imja-20260913T140000Z",
+  "provider": "nepal-dhm",
+  "event_type": "sensor.reading",
+  "asset": "imja-tsho",
+  "metric": "water_level_m",
+  "value": 5.8,
+  "observed_at": "2026-09-13T14:00:00+00:00",
+  "available_at": "2026-09-13T14:02:00+00:00",
+  "quality_status": "validated",
+  "source_url": "https://example.gov.np/traceable-record",
+  "is_synthetic": false
+}</code></pre>
+</article>
+{% endblock %}

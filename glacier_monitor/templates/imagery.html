@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Glacier imagery explorer | HimalayaWatch{% endblock %}
+{% block content %}
+<section class="imagery-hero">
+  <div>
+    <p class="eyebrow">ROLLING THREE-MONTH OBSERVATION WINDOW</p>
+    <h1>Glacier imagery explorer</h1>
+    <p>Browse acquisition metadata across Nepal, Tibet, India, and Pakistan. The default records are deterministic interface demos—not satellite images or hazard detections.</p>
+  </div>
+  <div class="imagery-count"><strong id="imagery-total">—</strong><span>matching observations</span></div>
+</section>
+
+<section id="catalog-notice" class="catalog-notice" aria-live="polite">
+  <strong>Loading catalog provenance…</strong>
+</section>
+
+<form id="imagery-filters" class="imagery-filters" aria-label="Imagery filters"
+      data-initial-glacier="{{ initial_glacier_id }}">
+  <label>Search
+    <input id="imagery-search" type="search" maxlength="100" placeholder="Name, inventory ID, item ID">
+  </label>
+  <label>Country
+    <select id="imagery-country"><option value="">All four regions</option><option>Nepal</option><option>Tibet</option><option>India</option><option>Pakistan</option></select>
+  </label>
+  <label>Region
+    <select id="imagery-region"><option value="">All regions</option></select>
+  </label>
+  <label>Glacier
+    <select id="imagery-glacier"><option value="">All catalog glaciers</option></select>
+  </label>
+  <label>From
+    <input id="imagery-start" type="date">
+  </label>
+  <label>To
+    <input id="imagery-end" type="date">
+  </label>
+  <label>Max cloud %
+    <input id="imagery-cloud" type="number" min="0" max="100" step="1" value="100">
+  </label>
+  <label>Source
+    <select id="imagery-source">
+      <option value="">All sources</option>
+      <option value="Synthetic demo observation metadata">Synthetic demo metadata</option>
+      <option value="Copernicus Sentinel-2 STAC">Copernicus Sentinel-2 STAC</option>
+    </select>
+  </label>
+  <button type="submit">Apply filters</button>
+  <button type="button" id="imagery-reset" class="secondary">Reset</button>
+</form>
+
+<section class="imagery-layout">
+  <div class="imagery-map-wrap">
+    <div id="imagery-map" role="application" aria-label="Glacier inventory map"></div>
+    <p class="map-caption">Points are inventory centroids, not glacier outlines. Map selection filters observations.</p>
+  </div>
+  <aside id="glacier-summary" class="glacier-summary" aria-live="polite">
+    <p class="eyebrow">GLACIER DETAIL</p>
+    <h2>Choose a glacier</h2>
+    <p>Select a map point, filter, or detail link. Unnamed glaciers are shown by their inventory ID.</p>
+  </aside>
+</section>
+
+<section class="imagery-gallery-section">
+  <div class="section-heading">
+    <div><p class="eyebrow">OBSERVATION GALLERY</p><h2>Recent acquisitions and demo records</h2></div>
+    <p id="imagery-window">Loading date bounds…</p>
+  </div>
+  <div class="optical-warning">
+    <strong>Interpret with care.</strong> Cloud, terrain shadow, seasonal snow, and sensor resolution can obscure or mimic change. Product metadata alone does not predict a hazard, and Tibet coverage or access may vary.
+  </div>
+  <div id="imagery-results" class="imagery-grid" aria-live="polite">
+    <div class="loading-card">Loading imagery observations…</div>
+  </div>
+  <div class="load-more-wrap"><button id="imagery-load-more" type="button" hidden>Load more</button></div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='vendor/leaflet.js') }}"></script>
+<script src="{{ url_for('static', filename='imagery.js') }}"></script>
+{% endblock %}

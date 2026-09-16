@@ -1,0 +1,88 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "centralindia"
+    },
+    "namePrefix": {
+      "value": "hwatch"
+    },
+    "environmentName": {
+      "value": "prod"
+    },
+    "tags": {
+      "value": {
+        "costCenter": "research-monitoring",
+        "dataClassification": "non-authoritative-observations",
+        "owner": "platform-team"
+      }
+    },
+    "eventHubsSku": {
+      "value": "Standard"
+    },
+    "eventHubsCapacity": {
+      "value": 1
+    },
+    "eventHubPartitionCount": {
+      "value": 4
+    },
+    "eventHubRetentionDays": {
+      "value": 7
+    },
+    "consumerGroupName": {
+      "value": "himalayawatch-processors"
+    },
+    "eventHubName": {
+      "value": "observations"
+    },
+    "archiveContainerName": {
+      "value": "raw-events"
+    },
+    "checkpointContainerName": {
+      "value": "eventhub-checkpoints"
+    },
+    "storageSku": {
+      "value": "Standard_ZRS"
+    },
+    "storageRetentionDays": {
+      "value": 30
+    },
+    "logRetentionDays": {
+      "value": 90
+    },
+    "deployCommunicationServices": {
+      "value": true
+    },
+    "deployEmailService": {
+      "value": true
+    },
+    "communicationDataLocation": {
+      "value": "United States"
+    },
+    "emailSenderAddress": {
+      "value": ""
+    },
+    "communicationServicesRoleDefinitionId": {
+      "value": ""
+    },
+    "deployContainerApps": {
+      "value": false
+    },
+    "containerImage": {
+      "value": "himalayawatch:tag"
+    },
+    "webExternalIngress": {
+      "value": false
+    },
+    "containerRegistryServer": {
+      "value": ""
+    },
+    "consumerCronExpression": {
+      "value": "*/2 * * * *"
+    },
+    "notificationCronExpression": {
+      "value": "1-59/10 * * * *"
+    }
+  }
+}
