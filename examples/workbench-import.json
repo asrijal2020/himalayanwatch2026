@@ -1,0 +1,39 @@
+{
+  "schema": "himalayawatch.workbench-import.v1",
+  "source_repository": "https://github.com/harineupane_microsoft/NepalFloodProject",
+  "source_commit": "a7aaa50bcf40e3f264b9aeb76eb4017a0146a124",
+  "receipts": [
+    {
+      "receipt_id": "example-sentinel-catalog-receipt",
+      "source_id": "copernicus-dataspace-stac",
+      "source_item_id": "replace-with-provider-item-id",
+      "source_url": "https://stac.dataspace.copernicus.eu/",
+      "source_role": "observation",
+      "observed_start": "2026-09-01T05:00:00+00:00",
+      "observed_end": "2026-09-01T05:10:00+00:00",
+      "source_available_at": null,
+      "availability_basis": "unknown",
+      "locally_first_seen_at": "2026-09-01T08:00:00+00:00",
+      "processed_at": "2026-09-01T08:01:00+00:00",
+      "rights_status": "pending",
+      "rights_ref": "Review Copernicus Data Space and product terms.",
+      "quality_status": "unverified",
+      "quality_review_ref": null,
+      "crs": "EPSG:4326",
+      "units": null,
+      "resolution": "catalog metadata only",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "byte_count": null,
+      "algorithm_id": "catalog-discovery",
+      "algorithm_version": "1",
+      "code_commit": "a7aaa50bcf40e3f264b9aeb76eb4017a0146a124",
+      "limitations": [
+        "Template only; replace fields from a reviewed export.",
+        "Metadata discovery is not pixel acquisition or hazard detection."
+      ],
+      "eligibility_state": "discovered"
+    }
+  ],
+  "observation_comparisons": [],
+  "model_runs": []
+}

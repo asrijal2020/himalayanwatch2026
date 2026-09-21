@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Evidence Workbench · HimalayaWatch{% endblock %}
+{% block content %}
+<section class="page-intro workbench-intro">
+  <p class="eyebrow">INTEGRATED RESEARCH WORKBENCH · LOCAL EVIDENCE</p>
+  <h1>Observation to evidence</h1>
+  <p>The Evidence Workbench from port 8010 is consolidated into this Flask application. Imported runs, acquisition receipts, observation comparisons, model lineage, and synthetic exercises remain non-operational research evidence.</p>
+</section>
+
+<section class="workbench-shell" aria-label="Evidence workbench">
+  <div id="workbench-status" class="loading-card" role="status">Loading integrated workbench…</div>
+  <nav class="workbench-tabs" aria-label="Workbench areas">
+    <button data-tab="overview" aria-current="page">Overview</button>
+    <button data-tab="evidence">Evidence &amp; lineage</button>
+    <button data-tab="sources">Source discovery</button>
+    <button data-tab="acquisition">Case acquisition</button>
+    <button data-tab="observations">Glacier &amp; lake observations</button>
+    <button data-tab="prediction">Prediction lab</button>
+    <button data-tab="synthetic">Synthetic lab</button>
+  </nav>
+
+  <section id="panel-overview" class="workbench-panel">
+    <div class="workbench-metrics" id="workbench-metrics"></div>
+    <div class="content-grid workbench-grid">
+      <article class="prose-card">
+        <p class="eyebrow">SHARED PIPELINE</p>
+        <h2>Evidence before decisions</h2>
+        <ol class="evidence-pipeline">
+          <li>Approved observations</li><li>Quality checks</li><li>Evidence storage</li>
+          <li>Hazard-specific models</li><li>Scientific review</li>
+          <li>Authorized decision</li><li>Delivery and acknowledgement</li>
+        </ol>
+      </article>
+      <article class="prose-card">
+        <p class="eyebrow">SAFETY BOUNDARY</p>
+        <h2>Research-only integration</h2>
+        <p>Glacier velocity is not displacement, lake level is not river stage, and modeled CO₂ is not a direct measurement. AI-generated explanations cannot change calculations or authorize warnings.</p>
+        <a class="button-link" href="{{ url_for('pilot.pilot_page') }}">Open operational-readiness gates</a>
+      </article>
+    </div>
+    <section class="workbench-section">
+      <div class="section-heading"><h2>Recent imported research</h2><span class="badge research_only">Local archive</span></div>
+      <div id="recent-runs" class="pilot-list"></div>
+    </section>
+  </section>
+
+  <section id="panel-evidence" class="workbench-panel" hidden>
+    <div class="section-heading"><div><p class="eyebrow">IMMUTABLE LINEAGE</p><h2>Evidence &amp; run details</h2></div></div>
+    <div class="workbench-selector"><label>Archived record<select id="archive-record"><option value="">Select a record</option></select></label></div>
+    <div id="archive-detail" class="prose-card empty-state">Select a record to inspect its hashes, origin, result summary, and scientific role.</div>
+  </section>
+
+  <section id="panel-sources" class="workbench-panel" hidden>
+    <div class="section-heading"><div><p class="eyebrow">DISCOVERY, NOT AUTOMATIC INGESTION</p><h2>Source discovery</h2></div></div>
+    <div id="source-catalog" class="discovery-grid"></div>
+    <section class="workbench-section">
+      <div class="section-heading"><div><p class="eyebrow">LICENSED PUBLIC DATA</p><h2>ICIMOD datasets</h2></div></div>
+      <div id="icimod-datasets" class="pilot-list"></div>
+    </section>
+    <section class="workbench-section">
+      <div class="section-heading"><div><p class="eyebrow">OPTIONAL COMPUTE ADAPTER</p><h2>Google Earth Engine</h2></div></div>
+      <div id="gee-status" class="prose-card loading-card">Checking local Earth Engine configuration…</div>
+    </section>
+  </section>
+
+  <section id="panel-acquisition" class="workbench-panel" hidden>
+    <div class="section-heading"><div><p class="eyebrow">RASUWA–TRISHULI CASE PACK</p><h2>Acquisition receipts</h2></div></div>
+    <p class="readiness-note">Receipts prove what was found or registered; they do not approve scientific use. Raw licensed or large geospatial files remain in the source workbench folder.</p>
+    <div id="acquisition-receipts" class="pilot-list"></div>
+  </section>
+
+  <section id="panel-observations" class="workbench-panel" hidden>
+    <div class="section-heading"><div><p class="eyebrow">BOUNDED COMPARISONS</p><h2>Glacier &amp; lake observations</h2></div></div>
+    <p class="readiness-note">Observation comparisons retain common coverage, uncertainty, source references, and explicit withheld conclusions. The integrated archive never converts catalogue metadata into pixel-derived hazard claims.</p>
+    <div id="observation-comparisons" class="pilot-list"></div>
+  </section>
+
+  <section id="panel-prediction" class="workbench-panel" hidden>
+    <div class="section-heading"><div><p class="eyebrow">MODEL ARTIFACTS</p><h2>Prediction lab archive</h2></div><span class="badge withheld">Automatic promotion disabled</span></div>
+    <p class="readiness-note">Experiments use chronological splits, local model lineage, per-horizon evaluation, calibration status, and out-of-domain abstention. Imported predictions require a scientific review before they can become evidence.</p>
+    <div id="prediction-records" class="pilot-list"></div>
+  </section>
+
+  <section id="panel-synthetic" class="workbench-panel" hidden>
+    <div class="section-heading"><div><p class="eyebrow">FICTIONAL CATCHMENT</p><h2>Synthetic lab</h2></div><span class="badge warning">No external delivery</span></div>
+    <p class="synthetic-note">These scenarios are engineering controls with prescribed assumptions, fixed seeds, and local review trails. They are not hidden evaluation or evidence of real-world predictive skill.</p>
+    <div id="synthetic-scenarios" class="scenario-grid"></div>
+    <h3>Archived synthetic runs</h3>
+    <div id="synthetic-records" class="pilot-list"></div>
+  </section>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='workbench.js') }}"></script>
+{% endblock %}

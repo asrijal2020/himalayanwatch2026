@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Research signals | HimalayaWatch{% endblock %}
+{% block content %}
+<section class="page-intro">
+  <p class="eyebrow">RESEARCH SIGNALS · NOT PUBLIC WARNINGS</p>
+  <h1>Review queue for anomalous evidence</h1>
+  <p>Rules flag threshold crossings, rapid change, stale coverage, and abnormal movement for expert review. A signal is not proof of an impending collapse or flood.</p>
+</section>
+<section class="toolbar">
+  <label>State
+    <select id="alert-filter">
+      <option value="false">Active</option><option value="true">Acknowledged</option><option value="">All</option>
+    </select>
+  </label>
+  <label>Authorized operator
+    <input id="authorized-by" maxlength="100" placeholder="Name or duty role">
+  </label>
+  {% if separate_role_keys %}
+  <label>Scientist API key
+    <input id="scientist-key" type="password" autocomplete="off"
+      required aria-required="true" placeholder="Required for evidence review and acknowledgement">
+  </label>
+  <label>Authority API key
+    <input id="authority-key" type="password" autocomplete="off"
+      required aria-required="true" placeholder="Required for recipients and authorization">
+  </label>
+  {% else %}
+  <label>Operator API key
+    <input id="operator-key" type="password" autocomplete="off"
+      {% if operator_auth_required %}required aria-required="true"{% endif %}
+      placeholder="{% if operator_auth_required %}Required for recipient and alert changes{% else %}Not configured in this environment{% endif %}">
+  </label>
+  {% endif %}
+</section>
+{% if operator_auth_required %}
+<section class="notification-note" id="operator-auth-note">
+  <strong>Role authentication required:</strong>
+  {% if separate_role_keys %}
+  scientists acknowledge and review evidence; authorized authorities manage recipients and
+  approve notifications.
+  {% else %}
+  the legacy operator key currently covers both roles; configure separate scientist and
+  authority keys before an operational pilot.
+  {% endif %}
+  Keys stay in this page's memory and are not saved by the browser.
+</section>
+{% endif %}
+<section class="notification-note">
+  <strong>Two-step safety gate:</strong> acknowledgement records review; authorization queues
+  validated, non-synthetic evidence. Operational recipients are eligible only after the
+  supporting evidence has separate scientific approval. Delivery workers never turn research
+  signals into official warnings.
+</section>
+<section class="recipient-panel">
+  <div>
+    <p class="eyebrow">RECIPIENT LIST</p>
+    <h2>Notify SMS and email recipients in parallel</h2>
+    <p>Add one or more approved recipients. Separate destinations with commas or new lines.
+      Recipient details are masked in API and delivery views.</p>
+  </div>
+  <form id="recipient-form" class="recipient-form">
+    <label>List name
+      <input id="recipient-name" maxlength="100" required placeholder="Nepal duty roster">
+    </label>
+    <label>Channel
+      <select id="recipient-channel">
+        <option value="email">Email</option>
+        <option value="sms">SMS</option>
+        <option value="webhook">Webhook</option>
+      </select>
+    </label>
+    <label>Country
+      <select id="recipient-country">
+        <option value="">All regions</option>
+        <option>Nepal</option><option>Tibet</option><option>India</option><option>Pakistan</option>
+      </select>
+    </label>
+    <label>Minimum severity
+      <select id="recipient-severity">
+        <option value="critical">Critical</option>
+        <option value="warning">Warning</option>
+      </select>
+    </label>
+    <label>Recipient environment
+      <select id="recipient-environment">
+        <option value="test">Test / exercise</option>
+        <option value="operational">Operational pilot</option>
+      </select>
+    </label>
+    <label class="recipient-destinations">Email addresses, phone numbers, or webhook URL
+      <textarea id="recipient-destination" required
+        placeholder="team@example.org&#10;backup@example.org"></textarea>
+    </label>
+    <button type="submit">Add recipients</button>
+    {% if operator_auth_required %}
+    <p class="form-help">This action requires the authority/operator API key at the top of the page.</p>
+    {% endif %}
+    <p id="recipient-status" class="form-status" aria-live="polite"></p>
+  </form>
+</section>
+<section id="alerts-list" class="alerts-list" aria-live="polite">
+  <div class="loading-card">Loading alerts…</div>
+</section>
+<section class="section-block">
+  <div class="section-heading">
+    <div><p class="eyebrow">DELIVERY OUTBOX</p><h2>Authorized notification status</h2></div>
+  </div>
+  <div id="delivery-list" class="alerts-list" aria-live="polite"></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='alerts.js') }}"></script>{% endblock %}

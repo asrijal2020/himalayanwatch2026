@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Operations research dashboard | HimalayaWatch{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">HIMALAYAN REGION · MULTI-HAZARD DECISION SUPPORT</p>
+    <h1>See mountain change before hazards cascade downstream</h1>
+    <p>HimalayaWatch connects cryosphere, river, rainfall, weather, and disaster evidence in a traceable research workflow—without turning uncertain signals into automatic warnings.</p>
+  </div>
+  <div class="stat-grid" aria-label="Dashboard statistics">
+    <div><strong id="asset-count">—</strong><span>assets shown</span></div>
+    <div><strong id="active-alert-count">—</strong><span>active alerts</span></div>
+    <div><strong>0</strong><span>public warnings issued</span></div>
+  </div>
+</section>
+
+<section id="incident-spotlight" class="incident-spotlight" aria-live="polite">
+  <div class="incident-kicker">REFERENCE CASE · PRELIMINARY ASSESSMENT</div>
+  <div class="incident-main">
+    <div>
+      <h2>26 August 2026 · Bhote Koshi–Trishuli flash flood</h2>
+      <p>A suspected high-altitude ice-rock avalanche reportedly sent water, sediment, and boulders through the border river system. Monitoring stations were damaged as conditions unfolded.</p>
+    </div>
+    <div class="incident-stat"><strong>9 m</strong><span>reported rise in 30 min</span></div>
+  </div>
+  <div class="incident-guardrail">
+    Trigger confidence: <strong>preliminary</strong> · River forecast: <strong>withheld</strong> · Climate attribution not established
+  </div>
+</section>
+
+<section class="workflow-section">
+  <div class="section-heading">
+    <div><p class="eyebrow">EVIDENCE-TO-DECISION WORKFLOW</p><h2>Seven traceable gates before action</h2></div>
+    <span class="badge research_only">Human authorization required</span>
+  </div>
+  <ol class="workflow-grid">
+    <li><span>01</span><h3>Approved observations</h3><p>Accept only versioned partner contracts with stable asset identities and measurement references.</p></li>
+    <li><span>02</span><h3>Quality checks</h3><p>Validate units, timing, provenance, uncertainty, semantics, and synthetic status.</p></li>
+    <li><span>03</span><h3>Evidence storage</h3><p>Retain immutable payload hashes, acquisition receipts, and observation/availability clocks.</p></li>
+    <li><span>04</span><h3>Hazard models</h3><p>Keep river stage, lake level, glacier velocity, and cascade models semantically distinct.</p></li>
+    <li><span>05</span><h3>Scientific review</h3><p>Approve evidence and model candidates independently; withhold unsupported outputs.</p></li>
+    <li><span>06</span><h3>Authority decision</h3><p>Authorized officials decide whether test or operational recipients are eligible.</p></li>
+    <li><span>07</span><h3>Delivery and action</h3><p>Track retries, receipt confirmation, community action, and usable warning time.</p></li>
+  </ol>
+</section>
+
+<section class="filters" aria-label="Map filters">
+  <label>Country
+    <select id="country-filter">
+      <option value="">All countries</option><option>Nepal</option><option>Tibet</option>
+      <option>India</option><option>Pakistan</option>
+    </select>
+  </label>
+  <label>Asset type
+    <select id="type-filter">
+      <option value="">All types</option><option value="glacier">Glacier</option>
+      <option value="lake">Glacial lake</option><option value="station">Station/device</option>
+    </select>
+  </label>
+  <label>Risk
+    <select id="risk-filter">
+      <option value="">All risk levels</option><option>critical</option><option>high</option>
+      <option>moderate</option><option>low</option><option>unknown</option>
+    </select>
+  </label>
+  <button id="reset-filters" class="secondary">Reset</button>
+</section>
+
+<section class="map-section" aria-labelledby="monitoring-map-title">
+  <div class="section-heading map-heading">
+    <div><p class="eyebrow">SPATIAL OVERVIEW</p><h2 id="monitoring-map-title">Monitoring map</h2></div>
+    <p>Explore assets and the retrospective event corridor</p>
+  </div>
+  <div class="dashboard-layout">
+  <div class="map-panel">
+    <div id="map" role="application" aria-label="Interactive map of Himalayan assets"></div>
+    <div class="map-legend" aria-label="Map legend">
+      <span><i class="dot glacier"></i>Glacier</span>
+      <span><i class="dot lake"></i>Lake</span>
+      <span><i class="dot station"></i>Station</span>
+      <span><i class="line cascade"></i>Event corridor</span>
+    </div>
+  </div>
+  <aside id="asset-detail" class="detail-panel" aria-live="polite">
+    <div class="empty-state">
+      <h2>Select an asset</h2>
+      <p>Choose a map marker or catalog item to inspect observations, freshness, thresholds, and sources.</p>
+    </div>
+  </aside>
+  </div>
+</section>
+
+<section class="evidence-section">
+  <div class="section-heading">
+    <div><p class="eyebrow">DATA READINESS</p><h2>Coverage, timing, and limits</h2></div>
+    <p>Access ≠ validated detection</p>
+  </div>
+  <div id="discovery-grid" class="discovery-grid" aria-live="polite">
+    <div class="loading-card">Checking bounded discovery status…</div>
+  </div>
+</section>
+
+<section class="catalog-section">
+  <div class="section-heading">
+    <div><p class="eyebrow">CATALOG</p><h2>Monitored assets</h2></div>
+    <p id="loading-state">Loading catalog…</p>
+  </div>
+  <p class="catalog-scope"><strong>Coverage:</strong> curated representative assets across Nepal, Tibet, India, and Pakistan—not a complete Himalayan inventory. Source dates, boundaries, and live-data availability vary.</p>
+  <div id="asset-grid" class="asset-grid" aria-live="polite"></div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='vendor/leaflet.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+{% endblock %}

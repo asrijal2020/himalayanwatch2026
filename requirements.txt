@@ -1,0 +1,12 @@
+Flask==3.1.2
+gunicorn==23.0.0
+pytest==8.4.2
+azure-communication-sms==1.1.0
+azure-communication-email==1.1.0
+azure-eventhub==5.15.0
+azure-eventhub-checkpointstoreblob==1.2.0
+azure-identity==1.25.3
+azure-storage-blob==12.27.1
+earthengine-api==1.7.43
+openpyxl==3.1.5
+pyshp==3.0.3

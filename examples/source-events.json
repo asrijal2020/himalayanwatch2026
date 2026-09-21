@@ -1,0 +1,21 @@
+{
+  "events": [
+    {
+      "event_id": "demo-imja-20260913T140000Z",
+      "provider": "field-gateway-demo",
+      "event_type": "sensor.reading",
+      "asset": "imja-tsho",
+      "metric": "water_level_m",
+      "value": 5.8,
+      "observed_at": "2026-09-13T14:00:00+00:00",
+      "available_at": "2026-09-13T14:02:00+00:00",
+      "quality_status": "validated",
+      "source_url": "https://example.org/demo/traceable-record",
+      "is_synthetic": true,
+      "metadata": {
+        "label": "SYNTHETIC DEMO EVENT",
+        "gateway_id": "demo-gateway-01"
+      }
+    }
+  ]
+}

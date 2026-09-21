@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Rasuwa–Trishuli shadow pilot | HimalayaWatch{% endblock %}
+{% block content %}
+<section class="page-intro">
+  <p class="eyebrow">SINGLE-CATCHMENT SHADOW PILOT</p>
+  <h1>Rasuwa–Trishuli evidence readiness</h1>
+  <p>Test approved observations, scientific review, model lineage, failure handling, and
+    authorized delivery without enabling public warnings.</p>
+</section>
+
+<section class="pilot-status" aria-live="polite">
+  <div class="section-heading">
+    <div><p class="eyebrow">READINESS GATES</p><h2>Operational claims remain blocked</h2></div>
+    <span class="badge withheld">Shadow mode</span>
+  </div>
+  <div id="pilot-gates" class="pilot-grid">
+    <div class="loading-card">Loading readiness gates…</div>
+  </div>
+</section>
+
+<section class="pilot-status">
+  <div class="section-heading">
+    <div><p class="eyebrow">TIMING AND COVERAGE</p><h2>Catchment observation requirements</h2></div>
+    <p>Hazard-specific freshness, not a universal 72-hour threshold</p>
+  </div>
+  <div id="pilot-coverage" class="pilot-grid" aria-live="polite"></div>
+</section>
+
+<section class="pilot-status">
+  <div class="section-heading">
+    <div><p class="eyebrow">VERSIONED EVIDENCE</p><h2>Acquisition receipts and scientific review</h2></div>
+    <p>Observation time ≠ availability time</p>
+  </div>
+  <div id="pilot-evidence" class="pilot-list" aria-live="polite"></div>
+</section>
+
+<section class="pilot-status">
+  <div class="section-heading">
+    <div><p class="eyebrow">LOCAL RESEARCH ARCHIVE</p><h2>September backup provenance</h2></div>
+    <p>Metadata and research records only; raw licensed binaries remain outside the app</p>
+  </div>
+  <div id="archive-summary" class="pilot-grid" aria-live="polite"></div>
+  <div id="acquisition-receipts" class="pilot-list" aria-live="polite"></div>
+</section>
+
+<section class="pilot-status">
+  <div class="section-heading">
+    <div><p class="eyebrow">MODEL LINEAGE</p><h2>Workbenches register bounded results</h2></div>
+    <p>Inputs, versions, hashes, uncertainty, and withholding reasons retained</p>
+  </div>
+  <div id="pilot-models" class="pilot-list" aria-live="polite"></div>
+</section>
+
+<section class="pilot-status">
+  <div class="section-heading">
+    <div><p class="eyebrow">INTEGRATION CATALOG</p><h2>Audited workbench and upstream interfaces</h2></div>
+    <p>Working ≠ operationally validated</p>
+  </div>
+  <div id="integration-catalog" class="pilot-grid" aria-live="polite"></div>
+</section>
+
+<section class="notification-note">
+  <strong>Integration boundary:</strong> use <code>POST /api/source-events</code> for approved
+  observation envelopes and <code>POST /api/model-runs</code> for workbench results. Glacier
+  velocity remains surface velocity—not displacement or evidence of impending collapse.
+  Lake level and river stage retain distinct measurement references. NepalFloodProject is
+  currently private and has no declared repository license, so HimalayaWatch independently
+  implements compatible contracts and imports provenance metadata and bounded research records
+  rather than redistributing its code or acquired binary products.
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='pilot.js') }}"></script>{% endblock %}
